@@ -71,6 +71,7 @@
             android:layout_marginBottom="5dp" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/google_sign_in_button"
             android:text="@string/signin_google"
             android:textColor="@color/colorWhite"
             android:background="@drawable/btn_signin_google"
@@ -80,6 +81,5 @@
             android:layout_marginRight="20dp"
             android:layout_marginBottom="80dp" />
     </LinearLayout>
-
 
 </RelativeLayout>
