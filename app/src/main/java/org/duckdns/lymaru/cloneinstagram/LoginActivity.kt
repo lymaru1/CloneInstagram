@@ -34,7 +34,11 @@ class LoginActivity : AppCompatActivity() {
             .build()
         googleSignInClient = GoogleSignIn.getClient(this, gso)
 
-   }
+    }
+
+    override fun onStart() {
+        super.onStart()
+    }
     fun googleLogin(){
         var signInIntent = googleSignInClient?.signInIntent
         startActivityForResult(signInIntent, GOOGLE_LOGIN_CODE)
@@ -96,6 +100,7 @@ class LoginActivity : AppCompatActivity() {
     fun moveMainPage(user:FirebaseUser?){
         if (user != null){
             startActivity(Intent(this, MainActivity::class.java))
+            finish()
         }
     }
 }
