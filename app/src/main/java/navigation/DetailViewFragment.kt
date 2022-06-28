@@ -1,5 +1,6 @@
 package navigation
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -98,6 +99,11 @@ class DetailViewFragment : Fragment() {
                 fragment.arguments = bundle
                 activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.main_content, fragment)?.commit()
             }
+            viewHolder.detailviewitem_comment_imageview.setOnClickListener { v ->
+                var intent = Intent(v.context, CommentActivity::class.java)
+                intent.putExtra("contentUid", contentUidList[position])
+                startActivity(intent)
+            }
         }
 
         override fun getItemCount(): Int {
@@ -111,12 +117,12 @@ class DetailViewFragment : Fragment() {
 
                 if(contentDTO!!.favorites.containsKey(uid)){
                     // When the button is clicked
-                    contentDTO?.favoriteCount = contentDTO?.favoriteCount -1
-                    contentDTO?.favorites.remove(uid)
+                    contentDTO?.favoriteCount = contentDTO?.favoriteCount!! - 1
+                    contentDTO?.favorites?.remove(uid)
                 }else{
                     // When the button is not clicked
-                    contentDTO?.favoriteCount = contentDTO?.favoriteCount + 1
-                    contentDTO?.favorites[uid!!] = true
+                    contentDTO?.favoriteCount = contentDTO?.favoriteCount!! + 1
+                    contentDTO?.favorites?.set(uid!!, true)
                 }
                 transaction.set(tsDoc, contentDTO)
             }

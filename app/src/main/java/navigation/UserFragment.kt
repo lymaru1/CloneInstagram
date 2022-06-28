@@ -91,7 +91,7 @@ class UserFragment : Fragment() {
             }
             if(followDTO?.followerCount != null){
                 fragmentView?.account_tv_follower_count?.text = followDTO?.followerCount?.toString()
-                if (followDTO?.followers?.containsKey(currentUserUid!!)) {
+                if (followDTO?.followers?.containsKey(currentUserUid!!) == true) {
                     fragmentView?.account_btn_follow_signout?.text = getString(R.string.follow_cancel)
                     fragmentView?.account_btn_follow_signout?.background?.setColorFilter(ContextCompat.getColor(activity!!, R.color.colorLightGray), PorterDuff.Mode.MULTIPLY)
                 }else{
@@ -119,12 +119,12 @@ class UserFragment : Fragment() {
             }
             if(followDTO.followings.containsKey(uid)){
                 // it remove following third person
-                followDTO?.followingCount = followDTO?.followingCount - 1
-                followDTO?.followers.remove(uid!!)
+                followDTO?.followingCount = followDTO?.followingCount!! - 1
+                followDTO?.followers?.remove(uid!!)
             }else{
                 // it add following third person
-                followDTO?.followingCount = followDTO?.followingCount + 1
-                followDTO?.followers[uid!!] = true
+                followDTO?.followingCount = followDTO?.followingCount!! + 1
+                followDTO?.followers!![uid!!] = true
             }
             transaction.set(tsDocFollowing, followDTO)
             return@runTransaction
