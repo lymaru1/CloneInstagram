@@ -21,6 +21,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import navigation.model.ContentDTO
 import org.duckdns.lymaru.cloneinstagram.R
 import kotlinx.android.synthetic.main.fragment_user.view.*
+import navigation.model.AlarmDTO
 import navigation.model.FollowDTO
 import org.duckdns.lymaru.cloneinstagram.LoginActivity
 import org.duckdns.lymaru.cloneinstagram.MainActivity
@@ -137,7 +138,7 @@ class UserFragment : Fragment() {
                 followDTO = FollowDTO()
                 followDTO!!.followerCount = 1
                 followDTO!!.followers[currentUserUid!!] = true
-
+                followerAlarm(uid!!)
                 transaction.set(tsDocFollower, followDTO!!)
                 return@runTransaction
             }
@@ -149,10 +150,20 @@ class UserFragment : Fragment() {
                 // it add following third person
                 followDTO!!.followerCount = followDTO!!.followerCount + 1
                 followDTO!!.followers[currentUserUid!!] = true
+                followerAlarm(uid!!)
             }
             transaction.set(tsDocFollower, followDTO!!)
             return@runTransaction
         }
+    }
+    fun followerAlarm(destinationUid : String){
+        var alarmDTO = AlarmDTO()
+        alarmDTO.destinationUid = destinationUid
+        alarmDTO.userId = auth?.currentUser?.email
+        alarmDTO.uid = auth?.currentUser?.uid
+        alarmDTO.kind = 2
+        alarmDTO.timestamp = System.currentTimeMillis()
+        FirebaseFirestore.getInstance().collection("alarms").document().set(alarmDTO)
     }
 
     fun getProfileImage(){
