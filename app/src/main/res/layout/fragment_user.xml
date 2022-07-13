@@ -16,7 +16,7 @@
             android:layout_height="100dp" />
 
         <Button
-            android:id="@+id/account_btn_follow_signout"
+            android:id="@+id/account_btn_follow_sign_out"
             android:text="@string/follow"
             android:layout_toRightOf="@+id/account_iv_profile"
             android:layout_alignParentBottom="true"

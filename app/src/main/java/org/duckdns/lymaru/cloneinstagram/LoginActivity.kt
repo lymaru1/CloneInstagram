@@ -15,8 +15,8 @@ import com.google.firebase.auth.GoogleAuthProvider
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity() {
-    var auth : FirebaseAuth? = null
-    var googleSignInClient : GoogleSignInClient? = null
+    private lateinit var auth : FirebaseAuth
+    private lateinit var googleSignInClient : GoogleSignInClient
     val GOOGLE_LOGIN_CODE = 9001
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,7 +40,7 @@ class LoginActivity : AppCompatActivity() {
         super.onStart()
     }
     fun googleLogin(){
-        var signInIntent = googleSignInClient?.signInIntent
+        var signInIntent = googleSignInClient.signInIntent
         startActivityForResult(signInIntent, GOOGLE_LOGIN_CODE)
     }
 
@@ -69,7 +69,7 @@ class LoginActivity : AppCompatActivity() {
             }
     }
     fun signinAndSignup(){
-        auth?.createUserWithEmailAndPassword(email_edittext.text.toString(), password_edittext.text.toString())
+        auth?.createUserWithEmailAndPassword(email_edit_text.text.toString(), password_edit_text.text.toString())
             ?.addOnCompleteListener {
                 task ->
                 if(task.isSuccessful) {
@@ -85,7 +85,7 @@ class LoginActivity : AppCompatActivity() {
        }
     }
     fun signinEmail(){
-        auth?.createUserWithEmailAndPassword(email_edittext.text.toString(), password_edittext.text.toString())
+        auth?.createUserWithEmailAndPassword(email_edit_text.text.toString(), password_edit_text.text.toString())
             ?.addOnCompleteListener {
              task ->
             if (task.isSuccessful) {
