@@ -49,15 +49,15 @@ class UserFragment : Fragment() {
 
         if(uid == currentUserUid){
             // MyPage
-            fragmentView?.account_btn_follow_signout?.text = getString(R.string.signout)
-            fragmentView?.account_btn_follow_signout?.setOnClickListener {
+            fragmentView?.account_btn_follow_sign_out?.text = getString(R.string.sign_out)
+            fragmentView?.account_btn_follow_sign_out?.setOnClickListener {
                 activity?.finish()
                 startActivity(Intent(activity, LoginActivity::class.java))
                 auth?.signOut()
             }
         }else{
             // OtherUserPage
-            fragmentView?.account_btn_follow_signout?.text = getString(R.string.follow)
+            fragmentView?.account_btn_follow_sign_out?.text = getString(R.string.follow)
             var mainactivity = (activity as MainActivity)
             mainactivity?.toolbar_username?.text = arguments?.getString("userId")
             mainactivity?.toolbar_btn_back?.setOnClickListener {
@@ -66,7 +66,7 @@ class UserFragment : Fragment() {
             mainactivity?.toolbar_title_image?.visibility = View.GONE
             mainactivity?.toolbar_username?.visibility = View.VISIBLE
             mainactivity?.toolbar_btn_back?.visibility = View.VISIBLE
-            fragmentView?.account_btn_follow_signout?.setOnClickListener {
+            fragmentView?.account_btn_follow_sign_out?.setOnClickListener {
                 requestFollow()
             }
         }
@@ -93,12 +93,12 @@ class UserFragment : Fragment() {
             if(followDTO?.followerCount != null){
                 fragmentView?.account_tv_follower_count?.text = followDTO?.followerCount?.toString()
                 if (followDTO?.followers?.containsKey(currentUserUid!!) == true) {
-                    fragmentView?.account_btn_follow_signout?.text = getString(R.string.follow_cancel)
-                    fragmentView?.account_btn_follow_signout?.background?.setColorFilter(ContextCompat.getColor(activity!!, R.color.colorLightGray), PorterDuff.Mode.MULTIPLY)
+                    fragmentView?.account_btn_follow_sign_out?.text = getString(R.string.follow_cancel)
+                    fragmentView?.account_btn_follow_sign_out?.background?.setColorFilter(ContextCompat.getColor(activity!!, R.color.colorLightGray), PorterDuff.Mode.MULTIPLY)
                 }else{
-                    fragmentView?.account_btn_follow_signout?.text = getString(R.string.follow)
+                    fragmentView?.account_btn_follow_sign_out?.text = getString(R.string.follow)
                     if(uid != currentUserUid){
-                        fragmentView?.account_btn_follow_signout?.background?.colorFilter = null
+                        fragmentView?.account_btn_follow_sign_out?.background?.colorFilter = null
                     }
                 }
             }

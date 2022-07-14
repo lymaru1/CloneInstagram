@@ -25,7 +25,7 @@
         <LinearLayout
             android:gravity="center"
             android:layout_toRightOf="@id/account_iv_profile"
-            android:layout_above="@id/account_btn_follow_signout"
+            android:layout_above="@id/account_btn_follow_sign_out"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
