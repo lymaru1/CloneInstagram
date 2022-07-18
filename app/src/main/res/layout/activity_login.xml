@@ -4,7 +4,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
     <data>
-
+        <variable
+            name="login"
+            type="org.duckdns.lymaru.cloneinstagram.LoginActivity" />
     </data>
 
     <RelativeLayout
@@ -13,14 +15,14 @@
         tools:context=".LoginActivity">
 
         <androidx.constraintlayout.utils.widget.ImageFilterView
-            android:layout_above="@+id/sign_in_layout"
+            android:layout_above="@+id/signInLayout"
             android:layout_alignParentTop="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:src="@drawable/logo_title"/>
 
         <LinearLayout
-            android:id="@+id/sign_in_layout"
+            android:id="@+id/signInLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
@@ -33,7 +35,7 @@
                 android:layout_marginRight="20dp">
 
                 <EditText
-                    android:id="@+id/email_edit_text"
+                    android:id="@+id/emailEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/email" />
@@ -46,7 +48,7 @@
                 android:layout_marginRight="20dp">
 
                 <EditText
-                    android:id="@+id/password_edit_text"
+                    android:id="@+id/passwordEditText"
                     android:inputType="textPassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -54,7 +56,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/email_login_button"
+                android:id="@+id/emailLoginButton"
                 android:text="@string/sign_in_email"
                 android:theme="@style/ButtonStyle"
                 android:layout_width="match_parent"
@@ -65,7 +67,7 @@
                 android:layout_marginBottom="35dp" />
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/google_sign_in_button"
+                android:id="@+id/googleSignInButton"
                 android:text="@string/sign_in_google"
                 android:textColor="@color/colorWhite"
                 android:background="@drawable/btn_sign_in_google"
