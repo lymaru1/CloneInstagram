@@ -1,9 +1,10 @@
- package org.duckdns.lymaru.cloneinstagram
+package org.duckdns.lymaru.cloneinstagram
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.databinding.DataBindingUtil
 import com.google.android.gms.auth.api.Auth
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
@@ -12,20 +13,26 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
-import kotlinx.android.synthetic.main.activity_login.*
+import org.duckdns.lymaru.cloneinstagram.databinding.ActivityLoginBinding
 
-class LoginActivity : AppCompatActivity() {
+ class LoginActivity : AppCompatActivity() {
+    private lateinit var binding : ActivityLoginBinding
     private lateinit var auth : FirebaseAuth
     private lateinit var googleSignInClient : GoogleSignInClient
-    val GOOGLE_LOGIN_CODE = 9001
+    val GOOGLE_LOGIN_CODE : Int = 9001
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
+        // data binging 할당
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_login)
+        // firebaseAuth 할당
         auth = FirebaseAuth.getInstance()
-        email_login_button.setOnClickListener {
-            signinAndSignup()
+
+        binding.emailLoginButton.setOnClickListener {
+            // 가입 및 로그인
+            signInAndSignUp()
         }
-        google_sign_in_button.setOnClickListener {
+        binding.googleSignInButton.setOnClickListener {
+            // 구글 계정으로 로그인
             googleLogin()
         }
         var gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -68,9 +75,9 @@ class LoginActivity : AppCompatActivity() {
                 }
             }
     }
-    fun signinAndSignup(){
-        auth?.createUserWithEmailAndPassword(email_edit_text.text.toString(), password_edit_text.text.toString())
-            ?.addOnCompleteListener {
+    fun signInAndSignUp(){
+        auth.createUserWithEmailAndPassword(binding.emailEditText.text.toString(), binding.passwordEditText.text.toString())
+            .addOnCompleteListener {
                 task ->
                 if(task.isSuccessful) {
                     // Creating a user account
@@ -80,19 +87,19 @@ class LoginActivity : AppCompatActivity() {
                     Toast.makeText(this, task.exception?.message, Toast.LENGTH_LONG).show()
                 }else{
                     // Login if you have account
-                    signinEmail()
+                    signInEmail()
                 }
        }
     }
-    fun signinEmail(){
-        auth?.createUserWithEmailAndPassword(email_edit_text.text.toString(), password_edit_text.text.toString())
-            ?.addOnCompleteListener {
+    fun signInEmail(){
+        auth.signInWithEmailAndPassword(binding.emailEditText.text.toString(), binding.passwordEditText.text.toString())
+            .addOnCompleteListener {
              task ->
             if (task.isSuccessful) {
                  // Login
                 moveMainPage(task.result?.user)
             } else {
-                 // Showw the Error Message
+                 // Show the Error Message
                 Toast.makeText(this, task.exception?.message, Toast.LENGTH_LONG).show()
             }
         }
