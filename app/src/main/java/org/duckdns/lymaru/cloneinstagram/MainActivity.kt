@@ -10,27 +10,33 @@ import android.view.MenuItem
 import android.view.View
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.databinding.DataBindingUtil
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.Task
 import com.google.android.material.navigation.NavigationBarView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.iid.FirebaseInstanceId
+import com.google.firebase.messaging.FirebaseMessaging
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.UploadTask
 import kotlinx.android.synthetic.main.activity_main.*
 import navigation.*
+import org.duckdns.lymaru.cloneinstagram.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListener {
+    private lateinit var binding : ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // 바인딩 할당
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         setContentView(R.layout.activity_main)
-//        bottomNavigation.setOnNavigationItemSelectedListener(this)
-        bottomNavigation.setOnItemSelectedListener(this)
+        binding.bottomNavigation.setOnItemSelectedListener(this)
         // 사진 권한 추가
         ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), 1)
 
         // Set default screen
-        bottomNavigation.selectedItemId = R.id.actionHome
+        binding.bottomNavigation.selectedItemId = R.id.actionHome
 
         registerPushToken()
     }
@@ -78,14 +84,17 @@ class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListen
     }
 
     fun registerPushToken(){
-        FirebaseInstanceId.getInstance().instanceId.addOnCompleteListener { task ->
-            val token = task.result?.token
+        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+            if (!task.isSuccessful) {
+                return@OnCompleteListener
+            }
+            val token = task.result
             val uid = FirebaseAuth.getInstance().currentUser?.uid
             val map = mutableMapOf<String, Any>()
             map["pushToken"] = token!!
 
             FirebaseFirestore.getInstance().collection("pushtokens").document(uid!!).set(map)
-        }
+        })
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

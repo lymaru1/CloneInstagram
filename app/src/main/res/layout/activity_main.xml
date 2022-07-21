@@ -1,73 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<layout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="main"
+            type="org.duckdns.lymaru.cloneinstagram.MainActivity" />
+    </data>
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/myToolbar"
-        android:layout_width="match_parent"
-        android:layout_height="35dp">
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <ImageView
-                android:id="@+id/toolbarBtnBack"
-                android:layout_alignParentLeft="true"
-                android:layout_marginLeft="22dp"
-                android:src="@drawable/ic_arrow_back"
-                android:layout_width="35dp"
-                android:layout_height="35dp" />
-
-            <TextView
-                android:id="@+id/toolbarUserName"
-                android:text="UserID"
-                android:textSize="16dp"
-                android:textColor="@color/colorNavIcon"
-                android:layout_toRightOf="@+id/toolbarBtnBack"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent" />
-
-            <ImageView
-                android:id="@+id/toolbarTitleImage"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:src="@drawable/logo_title" />
-        </RelativeLayout>
-    </androidx.appcompat.widget.Toolbar>
-
-    <LinearLayout
-        android:id="@+id/toolbarDivision"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_below="@+id/myToolbar"
-        android:background="@color/colorDivision"
-        android:orientation="horizontal" />
-
-    <FrameLayout
-        android:id="@+id/mainContent"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/toolbarDivision"
-        android:layout_above="@+id/navigationDivision" />
+        tools:context=".MainActivity">
 
-    <LinearLayout
-        android:id="@+id/navigationDivision"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_above="@+id/bottomNavigation"
-        android:background="@color/colorDivision"
-        android:orientation="horizontal" />
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/myToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="35dp">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNavigation"
-        android:layout_alignParentBottom="true"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:menu="@menu/bottom_navigation_main" />
+                <ImageView
+                    android:id="@+id/toolbarBtnBack"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginLeft="22dp"
+                    android:src="@drawable/ic_arrow_back"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp" />
 
-</RelativeLayout>
+                <TextView
+                    android:id="@+id/toolbarUserName"
+                    android:text="UserID"
+                    android:textSize="16dp"
+                    android:textColor="@color/colorNavIcon"
+                    android:layout_toRightOf="@+id/toolbarBtnBack"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent" />
+
+                <ImageView
+                    android:id="@+id/toolbarTitleImage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/logo_title" />
+            </RelativeLayout>
+        </androidx.appcompat.widget.Toolbar>
+
+        <LinearLayout
+            android:id="@+id/toolbarDivision"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/myToolbar"
+            android:background="@color/colorDivision"
+            android:orientation="horizontal" />
+
+        <FrameLayout
+            android:id="@+id/mainContent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/toolbarDivision"
+            android:layout_above="@+id/navigationDivision" />
+
+        <LinearLayout
+            android:id="@+id/navigationDivision"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_above="@+id/bottomNavigation"
+            android:background="@color/colorDivision"
+            android:orientation="horizontal" />
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottomNavigation"
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:menu="@menu/bottom_navigation_main" />
+
+    </RelativeLayout>
+</layout>
