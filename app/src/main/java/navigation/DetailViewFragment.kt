@@ -98,7 +98,7 @@ class DetailViewFragment : Fragment() {
                 bundle.putString("destinationUid", contentDTOs[position].uid)
                 bundle.putString("userId", contentDTOs[position].userId)
                 fragment.arguments = bundle
-                activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.main_content, fragment)?.commit()
+                activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.mainContent, fragment)?.commit()
             }
             viewHolder.detailviewitem_comment_imageview.setOnClickListener { v ->
                 var intent = Intent(v.context, CommentActivity::class.java)

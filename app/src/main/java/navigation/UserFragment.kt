@@ -59,13 +59,13 @@ class UserFragment : Fragment() {
             // OtherUserPage
             fragmentView?.account_btn_follow_sign_out?.text = getString(R.string.follow)
             var mainactivity = (activity as MainActivity)
-            mainactivity?.toolbar_username?.text = arguments?.getString("userId")
-            mainactivity?.toolbar_btn_back?.setOnClickListener {
-                mainactivity.bottom_navigation.selectedItemId = R.id.action_home
+            mainactivity?.toolbarUserName?.text = arguments?.getString("userId")
+            mainactivity?.toolbarBtnBack?.setOnClickListener {
+                mainactivity.bottomNavigation.selectedItemId = R.id.actionHome
             }
-            mainactivity?.toolbar_title_image?.visibility = View.GONE
-            mainactivity?.toolbar_username?.visibility = View.VISIBLE
-            mainactivity?.toolbar_btn_back?.visibility = View.VISIBLE
+            mainactivity?.toolbarTitleImage?.visibility = View.GONE
+            mainactivity?.toolbarUserName?.visibility = View.VISIBLE
+            mainactivity?.toolbarBtnBack?.visibility = View.VISIBLE
             fragmentView?.account_btn_follow_sign_out?.setOnClickListener {
                 requestFollow()
             }

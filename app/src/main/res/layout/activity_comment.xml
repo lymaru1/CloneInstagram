@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     tools:context="navigation.CommentActivity">
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/my_toolbar"
+        android:id="@+id/myToolbar"
         android:layout_width="match_parent"
         android:layout_height="35dp">
 
@@ -18,9 +18,9 @@
     </androidx.appcompat.widget.Toolbar>
 
     <LinearLayout
-        android:id="@+id/toolbar_division"
+        android:id="@+id/toolbarDivision"
         android:orientation="horizontal"
-        android:layout_below="@id/my_toolbar"
+        android:layout_below="@id/myToolbar"
         android:background="@color/colorDivision"
         android:layout_width="match_parent"
         android:layout_height="1dp" />
@@ -28,7 +28,7 @@
         android:id="@+id/comment_recyclerview"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="30dp"
-        android:layout_below="@id/toolbar_division"
+        android:layout_below="@id/toolbarDivision"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
     </androidx.recyclerview.widget.RecyclerView>

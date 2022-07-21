@@ -8,7 +8,7 @@
     tools:context="navigation.AddPhotoActivity">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/my_toolbar"
+        android:id="@+id/myToolbar"
         android:layout_width="match_parent"
         android:layout_height="35dp">
 
@@ -19,9 +19,9 @@
     </androidx.appcompat.widget.Toolbar>
 
     <LinearLayout
-        android:id="@+id/toolbar_division"
+        android:id="@+id/toolbarDivision"
         android:background="@color/colorDivision"
-        android:layout_below="@id/my_toolbar"
+        android:layout_below="@id/myToolbar"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="1dp" />
@@ -29,12 +29,12 @@
     <ImageView
         android:id="@+id/addphoto_image"
         android:layout_margin="8dp"
-        android:layout_below="@id/toolbar_division"
+        android:layout_below="@id/toolbarDivision"
         android:layout_width="100dp"
         android:layout_height="100dp" />
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/editText"
-        android:layout_below="@+id/toolbar_division"
+        android:layout_below="@+id/toolbarDivision"
         android:layout_toRightOf="@id/addphoto_image"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
