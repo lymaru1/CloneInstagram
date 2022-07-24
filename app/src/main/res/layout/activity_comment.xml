@@ -1,53 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-     xmlns:android="http://schemas.android.com/apk/res/android"
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="navigation.CommentActivity">
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/myToolbar"
-        android:layout_width="match_parent"
-        android:layout_height="35dp">
+    xmlns:tools="http://schemas.android.com/tools">
 
-        <ImageView
-            android:src="@drawable/logo_title"
+    <data>
+        <variable
+            name="comment"
+            type="navigation.CommentActivity" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="navigation.CommentActivity">
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/myToolbar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </androidx.appcompat.widget.Toolbar>
+            android:layout_height="35dp">
 
-    <LinearLayout
-        android:id="@+id/toolbarDivision"
-        android:orientation="horizontal"
-        android:layout_below="@id/myToolbar"
-        android:background="@color/colorDivision"
-        android:layout_width="match_parent"
-        android:layout_height="1dp" />
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/comment_recyclerview"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="30dp"
-        android:layout_below="@id/toolbarDivision"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    </androidx.recyclerview.widget.RecyclerView>
+            <ImageView
+                android:src="@drawable/logo_title"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </androidx.appcompat.widget.Toolbar>
 
-    <Button
-        android:id="@+id/comment_btn_send"
-        android:layout_alignParentRight="true"
-        android:layout_below="@id/comment_recyclerview"
-        android:layout_margin="10dp"
-        android:text="@string/send"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        <LinearLayout
+            android:id="@+id/toolbarDivision"
+            android:orientation="horizontal"
+            android:layout_below="@id/myToolbar"
+            android:background="@color/colorDivision"
+            android:layout_width="match_parent"
+            android:layout_height="1dp" />
 
-    <EditText
-        android:id="@+id/comment_edit_message"
-        android:layout_toLeftOf="@id/comment_btn_send"
-        android:layout_below="@id/comment_recyclerview"
-        android:layout_margin="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/commentRecyclerview"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="30dp"
+            android:layout_below="@id/toolbarDivision"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </androidx.recyclerview.widget.RecyclerView>
 
-</RelativeLayout>
+        <Button
+            android:id="@+id/commentButtonSend"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/commentRecyclerview"
+            android:layout_margin="10dp"
+            android:text="@string/send"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:id="@+id/commentEditMessage"
+            android:layout_toLeftOf="@id/commentButtonSend"
+            android:layout_below="@id/commentRecyclerview"
+            android:layout_margin="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </RelativeLayout>
+</layout>
