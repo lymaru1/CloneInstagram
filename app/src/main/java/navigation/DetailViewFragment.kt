@@ -29,8 +29,8 @@ class DetailViewFragment : Fragment() {
         firestore = FirebaseFirestore.getInstance()
         uid = FirebaseAuth.getInstance().currentUser?.uid
 
-        view.detailviewfragment_recyclerview.adapter = DetailViewRecyclerViewAdapter()
-        view.detailviewfragment_recyclerview.layoutManager = LinearLayoutManager(activity)
+        view.detailViewFragmentRecyclerview.adapter = DetailViewRecyclerViewAdapter()
+        view.detailViewFragmentRecyclerview.layoutManager = LinearLayoutManager(activity)
         return view
     }
     inner class DetailViewRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
@@ -63,36 +63,36 @@ class DetailViewFragment : Fragment() {
             var viewHolder = (holder as CustomViewHolder).itemView
 
             // UserId
-            viewHolder.detailviewitem_profile_textview.text = contentDTOs!![position].userId
+            viewHolder.detailViewItemProfileTextView.text = contentDTOs!![position].userId
 
             // Image
-            Glide.with(holder.itemView.context).load(contentDTOs!![position].imageUrl).into(viewHolder.detailviewitem_imageview_content)
+            Glide.with(holder.itemView.context).load(contentDTOs!![position].imageUrl).into(viewHolder.detailViewItemImageViewContent)
 
             // Explain of content
-            viewHolder.detailviewitem_explain_textview.text = contentDTOs!![position].explain
+            viewHolder.detailViewItemExplainTextView.text = contentDTOs!![position].explain
 
             // Likes
-            viewHolder.detailviewitem_favoritecounter_textview.text = "Lkies " + contentDTOs!![position].favoriteCount
+            viewHolder.detailViewItemFavoriteCounterTextView.text = "Lkies " + contentDTOs!![position].favoriteCount
 
             // ProfileImage
-            Glide.with(holder.itemView.context).load(contentDTOs!![position].imageUrl).into(viewHolder.detailviewitem_profile_image)
+            Glide.with(holder.itemView.context).load(contentDTOs!![position].imageUrl).into(viewHolder.detailViewItemProfileImage)
 
             // This code is when the button is clicked
-            viewHolder.detailviewitem_favorite_imageview.setOnClickListener {
+            viewHolder.detailViewItemFavoriteImageView.setOnClickListener {
                 favoriteEvent(position)
             }
 
             // This code is when the page is loaded
             if(contentDTOs!![position].favorites.containsKey(uid)){
                 // This is like status
-                viewHolder.detailviewitem_favorite_imageview.setImageResource(R.drawable.ic_favorite)
+                viewHolder.detailViewItemFavoriteImageView.setImageResource(R.drawable.ic_favorite)
             }else{
                 // This unlike status
-                viewHolder.detailviewitem_favorite_imageview.setImageResource(R.drawable.ic_favorite_border)
+                viewHolder.detailViewItemFavoriteImageView.setImageResource(R.drawable.ic_favorite_border)
             }
 
             // This code is when the profile image is clicked
-            viewHolder.detailviewitem_profile_image.setOnClickListener {
+            viewHolder.detailViewItemProfileImage.setOnClickListener {
                 var fragment = UserFragment()
                 var bundle = Bundle()
                 bundle.putString("destinationUid", contentDTOs[position].uid)
@@ -100,7 +100,7 @@ class DetailViewFragment : Fragment() {
                 fragment.arguments = bundle
                 activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.mainContent, fragment)?.commit()
             }
-            viewHolder.detailviewitem_comment_imageview.setOnClickListener { v ->
+            viewHolder.detailViewItemCommentImageView.setOnClickListener { v ->
                 var intent = Intent(v.context, CommentActivity::class.java)
                 intent.putExtra("contentUid", contentUidList[position])
                 intent.putExtra("destinationUid", contentDTOs[position].uid)

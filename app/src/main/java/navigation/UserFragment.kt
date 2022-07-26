@@ -49,15 +49,15 @@ class UserFragment : Fragment() {
 
         if(uid == currentUserUid){
             // MyPage
-            fragmentView?.account_btn_follow_sign_out?.text = getString(R.string.sign_out)
-            fragmentView?.account_btn_follow_sign_out?.setOnClickListener {
+            fragmentView?.accountButtonFollowSignOut?.text = getString(R.string.sign_out)
+            fragmentView?.accountButtonFollowSignOut?.setOnClickListener {
                 activity?.finish()
                 startActivity(Intent(activity, LoginActivity::class.java))
                 auth?.signOut()
             }
         }else{
             // OtherUserPage
-            fragmentView?.account_btn_follow_sign_out?.text = getString(R.string.follow)
+            fragmentView?.accountButtonFollowSignOut?.text = getString(R.string.follow)
             var mainactivity = (activity as MainActivity)
             mainactivity?.toolbarUserName?.text = arguments?.getString("userId")
             mainactivity?.toolbarBtnBack?.setOnClickListener {
@@ -66,14 +66,14 @@ class UserFragment : Fragment() {
             mainactivity?.toolbarTitleImage?.visibility = View.GONE
             mainactivity?.toolbarUserName?.visibility = View.VISIBLE
             mainactivity?.toolbarBtnBack?.visibility = View.VISIBLE
-            fragmentView?.account_btn_follow_sign_out?.setOnClickListener {
+            fragmentView?.accountButtonFollowSignOut?.setOnClickListener {
                 requestFollow()
             }
         }
 
-        fragmentView?.account_reclerview?.adapter = UserFragmentRecyclerViewAdapter()
-        fragmentView?.account_reclerview?.layoutManager = GridLayoutManager(activity, 3)
-        fragmentView?.account_iv_profile?.setOnClickListener {
+        fragmentView?.accountRecyclerView?.adapter = UserFragmentRecyclerViewAdapter()
+        fragmentView?.accountRecyclerView?.layoutManager = GridLayoutManager(activity, 3)
+        fragmentView?.accountImageViewProfile?.setOnClickListener {
             var photoPickerIntent = Intent(Intent.ACTION_PICK)
             photoPickerIntent.type = "image/*"
             activity?.startActivityForResult(photoPickerIntent, PICK_PROFILE_FROM_ALBUM)
@@ -88,17 +88,17 @@ class UserFragment : Fragment() {
             if(documentSnapshot == null) return@addSnapshotListener
             var followDTO = documentSnapshot.toObject(FollowDTO::class.java)
             if(followDTO?.followingCount != null){
-                fragmentView?.account_tv_following_count?.text = followDTO?.followingCount?.toString()
+                fragmentView?.accountTextViewFollowingCount?.text = followDTO?.followingCount?.toString()
             }
             if(followDTO?.followerCount != null){
-                fragmentView?.account_tv_follower_count?.text = followDTO?.followerCount?.toString()
+                fragmentView?.accountTextViewFollowerCount?.text = followDTO?.followerCount?.toString()
                 if (followDTO?.followers?.containsKey(currentUserUid!!) == true) {
-                    fragmentView?.account_btn_follow_sign_out?.text = getString(R.string.follow_cancel)
-                    fragmentView?.account_btn_follow_sign_out?.background?.setColorFilter(ContextCompat.getColor(activity!!, R.color.colorLightGray), PorterDuff.Mode.MULTIPLY)
+                    fragmentView?.accountButtonFollowSignOut?.text = getString(R.string.follow_cancel)
+                    fragmentView?.accountButtonFollowSignOut?.background?.setColorFilter(ContextCompat.getColor(activity!!, R.color.colorLightGray), PorterDuff.Mode.MULTIPLY)
                 }else{
-                    fragmentView?.account_btn_follow_sign_out?.text = getString(R.string.follow)
+                    fragmentView?.accountButtonFollowSignOut?.text = getString(R.string.follow)
                     if(uid != currentUserUid){
-                        fragmentView?.account_btn_follow_sign_out?.background?.colorFilter = null
+                        fragmentView?.accountButtonFollowSignOut?.background?.colorFilter = null
                     }
                 }
             }
@@ -171,7 +171,7 @@ class UserFragment : Fragment() {
             if(documentSnapshot == null) return@addSnapshotListener
             if(documentSnapshot.data != null){
                 var url = documentSnapshot?.data!!["image"]
-                Glide.with(activity!!).load(url).apply(RequestOptions().circleCrop()).into(fragmentView?.account_iv_profile!!)
+                Glide.with(activity!!).load(url).apply(RequestOptions().circleCrop()).into(fragmentView?.accountImageViewProfile!!)
             }
         }
 
@@ -188,7 +188,7 @@ class UserFragment : Fragment() {
                 for(snapshot in querySnapshot.documents){
                     contentDTOs.add(snapshot.toObject(ContentDTO::class.java)!!)
                 }
-                fragmentView?.account_tv_post_count?.text = contentDTOs.size.toString()
+                fragmentView?.accountTextViewPostCount?.text = contentDTOs.size.toString()
                 notifyDataSetChanged()
             }
         }

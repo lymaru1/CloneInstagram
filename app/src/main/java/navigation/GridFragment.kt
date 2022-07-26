@@ -26,8 +26,8 @@ class GridFragment : Fragment() {
     ): View? {
         fragmentView = LayoutInflater.from(activity).inflate(R.layout.fragment_grid, container, false)
         firestore = FirebaseFirestore.getInstance()
-        fragmentView?.gridfragment_recyclerview?.adapter = UserFragmentRecyclerViewAdapter()
-        fragmentView?.gridfragment_recyclerview?.layoutManager = GridLayoutManager(activity, 3)
+        fragmentView?.gridFragmentRecyclerview?.adapter = UserFragmentRecyclerViewAdapter()
+        fragmentView?.gridFragmentRecyclerview?.layoutManager = GridLayoutManager(activity, 3)
         return fragmentView
     }
     inner class UserFragmentRecyclerViewAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>(){

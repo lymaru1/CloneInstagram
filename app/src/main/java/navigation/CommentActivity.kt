@@ -28,19 +28,19 @@ class CommentActivity : AppCompatActivity() {
         contentUid = intent.getStringExtra("contentUid")
         destinationUid = intent.getStringExtra("destinationUid")
 
-        comment_recyclerview.adapter = CommentRecyclerviewAdapter()
-        comment_recyclerview.layoutManager = LinearLayoutManager(this)
+        commentRecyclerview.adapter = CommentRecyclerviewAdapter()
+        commentRecyclerview.layoutManager = LinearLayoutManager(this)
 
-        comment_btn_send?.setOnClickListener {
+        commentButtonSend?.setOnClickListener {
             var comment = ContentDTO.Comment()
             comment.userId = FirebaseAuth.getInstance().currentUser?.email
             comment.uid = FirebaseAuth.getInstance().currentUser?.uid
-            comment.comment = comment_edit_message.text.toString()
+            comment.comment = commentEditMessage.text.toString()
             comment.timestamp = System.currentTimeMillis()
 
             FirebaseFirestore.getInstance().collection("iamges").document(contentUid!!).collection("comments").document().set(comment)
-            commentAlarm(destinationUid!!, comment_edit_message.text.toString())
-            comment_edit_message.setText("")
+            commentAlarm(destinationUid!!, commentEditMessage.text.toString())
+            commentEditMessage.setText("")
         }
     }
     fun commentAlarm(destinationUid : String, message : String){
@@ -80,8 +80,8 @@ class CommentActivity : AppCompatActivity() {
 
         override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
             var view = holder.itemView
-            view.commentviewitem_textview_comment.text = comments[position].comment
-            view.commentviewitem_textview_profile.text = comments[position].userId
+            view.commentViewItemTextViewComment.text = comments[position].comment
+            view.commentViewItemTextViewProfile.text = comments[position].userId
 
             FirebaseFirestore.getInstance()
                 .collection("preofireImages")
@@ -90,7 +90,7 @@ class CommentActivity : AppCompatActivity() {
                 .addOnCompleteListener { task ->
                     if(task.isSuccessful){
                         var url = task.result!!["image"]
-                        Glide.with(holder.itemView.context).load(url).apply(RequestOptions().circleCrop()).into(view.commentviewitem_imageview_profile)
+                        Glide.with(holder.itemView.context).load(url).apply(RequestOptions().circleCrop()).into(view.commentViewItemImageViewProfile)
                     }
                 }
         }

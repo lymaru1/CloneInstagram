@@ -18,11 +18,11 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class AddPhotoActivity : AppCompatActivity() {
-    val PICK_IMAGE_FROM_ALUM = 0
-    var storage : FirebaseStorage? = null
-    var photohUrl : Uri? = null
-    var auth : FirebaseAuth? = null
-    var firestore : FirebaseFirestore? = null
+    private val PICK_IMAGE_FROM_ALBUM = 0
+    private lateinit var storage : FirebaseStorage
+    private lateinit var photoUrl : Uri
+    private lateinit var auth : FirebaseAuth
+    private lateinit var firestore : FirebaseFirestore
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_photo)
@@ -35,21 +35,21 @@ class AddPhotoActivity : AppCompatActivity() {
         // Open the Album
         var photoPickerIntent = Intent(Intent.ACTION_PICK)
         photoPickerIntent.type = "image/*"
-        startActivityForResult(photoPickerIntent, PICK_IMAGE_FROM_ALUM)
+        startActivityForResult(photoPickerIntent, PICK_IMAGE_FROM_ALBUM)
 
         // add image upload event
-        addphoto_btn_upload.setOnClickListener {
+        addPhotoButtonUpload.setOnClickListener {
             contentUpload()
         }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if(requestCode == PICK_IMAGE_FROM_ALUM){
+        if(requestCode == PICK_IMAGE_FROM_ALBUM){
             if(resultCode == Activity.RESULT_OK){
                 // Image selected
-                photohUrl = data?.data
-                addphoto_image.setImageURI(photohUrl)
+                photoUrl = data?.data!!
+                addPhotoImage.setImageURI(photoUrl)
             }else{
                 // cancel
                 finish()
@@ -65,7 +65,7 @@ class AddPhotoActivity : AppCompatActivity() {
         var storageRef = storage?.reference?.child("images")?.child(imageFileName)
 
         // Promise method
-        storageRef?.putFile(photohUrl!!)?.continueWithTask {
+        storageRef?.putFile(photoUrl!!)?.continueWithTask {
             task: Task<UploadTask.TaskSnapshot> ->
             return@continueWithTask storageRef.downloadUrl
         }?.addOnSuccessListener {
@@ -81,7 +81,7 @@ class AddPhotoActivity : AppCompatActivity() {
             contentDTO.userId = auth?.currentUser?.email
 
             // Insert explain of content
-            contentDTO.explain = addphoto_edit_explain.text.toString()
+            contentDTO.explain = addPhotoEditExplain.text.toString()
 
             // Insert timestamp
             contentDTO.timestamp = System.currentTimeMillis()
@@ -92,7 +92,7 @@ class AddPhotoActivity : AppCompatActivity() {
         }
 
         // Callback method
-/*        storageRef?.putFile(photohUrl!!)?.addOnSuccessListener {
+/*        storageRef?.putFile(photoUrl!!)?.addOnSuccessListener {
             storageRef.downloadUrl.addOnSuccessListener {
                 uri ->
                 var contentDTO = ContentDTO()
@@ -106,7 +106,7 @@ class AddPhotoActivity : AppCompatActivity() {
                 contentDTO.userId = auth?.currentUser?.email
 
                 // Insert explain of content
-                contentDTO.explain = addphoto_edit_explain.text.toString()
+                contentDTO.explain = addPhotoEditExplain.text.toString()
 
                 // Insert timestamp
                 contentDTO.timestamp = System.currentTimeMillis()

@@ -24,8 +24,8 @@ class AlarmFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         var view = LayoutInflater.from(activity).inflate(R.layout.fragment_ararm, container, false)
-        view.alarmfragment_recyclerview.adapter = AlarmRecyclerviewAdapter()
-        view.alarmfragment_recyclerview.layoutManager = LinearLayoutManager(activity)
+        view.alarmFragmentRecyclerview.adapter = AlarmRecyclerviewAdapter()
+        view.alarmFragmentRecyclerview.layoutManager = LinearLayoutManager(activity)
         return view
     }
 
@@ -60,25 +60,25 @@ class AlarmFragment : Fragment() {
             FirebaseFirestore.getInstance().collection("profileImages").document(alarmDTOList[position].uid!!).get().addOnCompleteListener { task ->
                 if(task.isSuccessful){
                     val url = task.result!!["image"]
-                    Glide.with(view.context).load(url).apply(RequestOptions().circleCrop()).into(view.commentviewitem_imageview_profile)
+                    Glide.with(view.context).load(url).apply(RequestOptions().circleCrop()).into(view.commentViewItemImageViewProfile)
                 }
             }
 
             when(alarmDTOList[position].kind){
                 0 ->{
                     val str_0 = alarmDTOList[position].userId + getString(R.string.alarm_favorite)
-                    view.commentviewitem_textview_profile.text = str_0
+                    view.commentViewItemTextViewProfile.text = str_0
                 }
                 1 ->{
                     val str_0 = alarmDTOList[position].userId + " " + getString(R.string.alarm_comment) + " of " + alarmDTOList[position].message
-                    view.commentviewitem_textview_profile.text = str_0
+                    view.commentViewItemTextViewProfile.text = str_0
                 }
                 2 ->{
                     val str_0 = alarmDTOList[position].userId + " " + getString(R.string.alarm_follow)
-                    view.commentviewitem_textview_profile.text = str_0
+                    view.commentViewItemTextViewProfile.text = str_0
                 }
             }
-            view.commentviewitem_textview_profile.visibility = View.INVISIBLE
+            view.commentViewItemTextViewProfile.visibility = View.INVISIBLE
         }
 
         override fun getItemCount(): Int {
